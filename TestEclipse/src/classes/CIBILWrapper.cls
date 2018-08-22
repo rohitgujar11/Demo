@@ -8,6 +8,8 @@ public class CIBILWrapper {
         public String scoreDate;
         public String scoreName;
         public String scoreCardName;
+        
+        
     }
 
     public Integer ACKNOWLEDGEMENTID;
