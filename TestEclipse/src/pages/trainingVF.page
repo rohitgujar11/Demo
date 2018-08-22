@@ -1,0 +1,35 @@
+<apex:page controller="TrainCon" sidebar="false" showHeader="false">
+
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!con}" var="a">
+                <apex:column value="{!a.FirstName}"/>
+                <apex:column value="{!a.LastName}"/>
+                <apex:column value="{!a.Email}"/>
+                <apex:column value="{!a.Phone}"/>
+                <apex:column >
+                     <apex:commandButton value="Delete" action="{!deleteRecord}" rerender="block" >
+                            <apex:param name="eventId" value="{!a.id}" assignTo="{!paramValue}"/>
+                     </apex:commandButton>
+                </apex:column>  
+               <!-- <apex:column >
+                    <apex:commandButton value="Edit" action="{!showPopup}" rerender="popup"/>
+                </apex:column> -->
+         
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!t}" var="t">
+                <apex:column ><apex:outputLabel >First Name : </apex:outputLabel> <apex:inputText value="{!t.FirstName}"/></apex:column>
+                <apex:column ><apex:outputLabel >Last  Name : </apex:outputLabel><apex:inputText value="{!t.LastName}"/></apex:column>
+                <apex:column ><apex:outputLabel >Email      : </apex:outputLabel><apex:inputText value="{!t.Email}"/></apex:column>
+                <apex:column ><apex:outputLabel >Phone Number  : </apex:outputLabel><apex:inputText value="{!t.Phone}"/></apex:column>                
+                              
+            </apex:pageBlockTable>
+                <apex:commandButton value="Save" action="{!saveContact}" rerender="block"/>
+        </apex:pageBlock> 
+
+     </apex:form> 
+
+</apex:page>

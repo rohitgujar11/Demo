@@ -1,0 +1,96 @@
+<apex:page controller="Employee">
+ <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+    <apex:form >
+        <apex:pageBlock >
+           <apex:outputLabel >Search User :</apex:outputLabel><apex:inputText value="{!searchstring}"/>
+           <apex:commandButton value="Search" action="{!search}" />
+        </apex:pageBlock>
+        <apex:pageBlock id="block">
+            <apex:pageBlockTable value="{!result}" var="a">
+                <apex:column value="{!a.First_Name__c}"/>
+                <apex:column value="{!a.Last_Name__c}"/>
+                <apex:column value="{!a.Email__c}"/>
+                <apex:column value="{!a.Phone_Number__c}"/>
+                <apex:column value="{!a.id}"/>
+                <apex:column headerValue="Action" >
+                      <button type="button" styleclass="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{!a.id}">Edit</button>
+                     <apex:commandButton value="Delete" action="{!deleteRecord}" rerender="block" styleclass="btn btn-info btn-lg">
+                            <apex:param name="eventId" value="{!a.id}" assignTo="{!paramValue}"/>
+                     </apex:commandButton>
+                </apex:column> 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:pageBlock id="block1">
+            <apex:pageBlockTable value="{!t}" var="t">
+                <apex:column ><apex:outputLabel >First Name : </apex:outputLabel> <apex:inputText value="{!t.First_Name__c}" styleclass="form-control"/></apex:column>
+                <apex:column ><apex:outputLabel >Last  Name : </apex:outputLabel><apex:inputText value="{!t.Last_Name__c}" styleclass="form-control" /></apex:column>
+                <apex:column ><apex:outputLabel >Email      : </apex:outputLabel><apex:inputText value="{!t.Email__c}" styleclass="form-control" /></apex:column>
+                <apex:column ><apex:outputLabel >Phone Number  : </apex:outputLabel><apex:inputText value="{!t.Phone_Number__c}" styleclass="form-control"/></apex:column>
+            </apex:pageBlockTable>
+        <apex:commandButton value="Save" action="{!saveValue}" rerender="block,block1"/>
+        </apex:pageBlock>
+        <apex:repeat value="{!result}" var="s">
+        <div class="modal fade" id="myModal{!s.id}" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Edit Record</h4>
+                    </div>
+                    <div class="modal-body">
+                        <apex:pageBlock >
+                        <apex:inputHidden value="{!s.id}" id="theHiddenInput"/>
+                        <div styleclass="container">
+                            <div styleclass="row">
+                              <div styleclass="col-sm-6">
+                                   <apex:outputLabel >First Name: </apex:outputLabel> <apex:inputText value="{!s.First_Name__c}" styleclass="form-control"/>
+                              </div> 
+                               <div styleclass="col-sm-6">
+                                   <apex:outputLabel >Last Name: </apex:outputLabel> <apex:inputText value="{!s.Last_Name__c}" styleclass="form-control"/>
+                              </div> 
+                               <div styleclass="col-sm-6">
+                                   <apex:outputLabel >Phone Number: </apex:outputLabel> <apex:inputText value="{!s.Phone_Number__c}" styleclass="form-control"/>
+                              </div> 
+                               <div styleclass="col-sm-6">
+                                  <apex:outputLabel >Phone Number: </apex:outputLabel> <apex:inputText value="{!s.Email__c}" styleclass="form-control"/>
+                              </div>
+                              <div class="col-sm-12" align="center">
+                                   <apex:commandButton value="Update" action="{!updateRecord}" styleclass="btn btn-info btn-lg form-control">
+                                     </apex:commandButton>
+                              </div>  
+                            </div>
+                        </div>
+                        </apex:pageBlock>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+           </apex:repeat>
+           <style type="text/css">
+       .customPopup{
+            background-color: white;
+            border-style: solid;
+            border-width: 2px;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            z-index: 9999;
+            /* These are the 3 css properties you will need to tweak so the pop 
+            up displays in the center of the screen. First set the width. Then set 
+            margin-left to negative half of what the width is. You can also add 
+            the height property for a fixed size pop up.*/
+            width: 500px;
+            margin-left: -250px;
+            top:100px;
+        }
+    </style>
+     </apex:form> 
+</apex:page>

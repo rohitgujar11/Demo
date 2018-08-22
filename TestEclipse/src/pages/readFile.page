@@ -1,0 +1,5 @@
+<apex:page standardController="Contact" action="{!dmlOperation}" extensions="readFile" >
+  <!-- Begin Default Content REMOVE THIS -->
+  <h2>CIBIL Report</h2>
+  
+</apex:page>

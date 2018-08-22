@@ -1,0 +1,65 @@
+<apex:page controller="Employee">
+
+    <apex:form id="block">
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!result}" var="a">
+                <apex:column value="{!a.First_Name__c}"/>
+                <apex:column value="{!a.Last_Name__c}"/>
+                <apex:column value="{!a.Email__c}"/>
+                <apex:column value="{!a.Phone_Number__c}"/>
+               
+                
+                <apex:column >
+                     <apex:commandButton value="Delete" action="{!deleteRecord}" rerender="block" >
+                            <apex:param name="eventId" value="{!a.id}" assignTo="{!paramValue}"/>
+                     </apex:commandButton>
+                </apex:column>  
+                <apex:column >
+                    <apex:commandButton value="Edit" action="{!showPopup}" rerender="popup"/>
+                </apex:column> 
+         
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!t}" var="t">
+                <apex:column ><apex:outputLabel >First Name : </apex:outputLabel> <apex:inputText value="{!t.First_Name__c}"/></apex:column>
+                <apex:column ><apex:outputLabel >Last  Name : </apex:outputLabel><apex:inputText value="{!t.Last_Name__c}"/></apex:column>
+                <apex:column ><apex:outputLabel >Email      : </apex:outputLabel><apex:inputText value="{!t.Email__c}"/></apex:column>
+                <apex:column ><apex:outputLabel >Phone Number  : </apex:outputLabel><apex:inputText value="{!t.Phone_Number__c}"/></apex:column>                
+                              
+            </apex:pageBlockTable>
+                <apex:commandButton value="Save" action="{!saveValue}" rerender="block"/>
+        </apex:pageBlock> 
+        
+        <apex:outputPanel id="popup">
+                <apex:outputPanel styleClass="customPopup" layout="block" rendered="{!displayPopUp}">
+                <iframe src="https://c.ap5.visual.force.com/a027F000004UYh2/e" height="300" width="500">
+              
+                </iframe>
+                <apex:commandButton value="Close" action="{!closePopup}" rerender="popup"/>
+           </apex:outputPanel>
+        </apex:outputPanel>
+        
+           
+           <style type="text/css">
+       .customPopup{
+            background-color: white;
+            border-style: solid;
+            border-width: 2px;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            z-index: 9999;
+            /* These are the 3 css properties you will need to tweak so the pop 
+            up displays in the center of the screen. First set the width. Then set 
+            margin-left to negative half of what the width is. You can also add 
+            the height property for a fixed size pop up.*/
+            width: 500px;
+            margin-left: -250px;
+            top:100px;
+        }
+    </style>
+     </apex:form> 
+
+</apex:page>

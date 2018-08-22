@@ -1,0 +1,28 @@
+<apex:page controller="CreateRequest" action="{!CreateRequestForEmail}">
+	<head>
+    	<script>
+        		window.onload=loadPage;        	
+        		function loadPage()
+        		{
+                    setTimeout('Function1',5000);
+                    setTimeout('Function2',10000);
+                    setTimeout('Function3',15000);
+                }        		
+        		function Function1(){
+                	CreateRequestForEmail();
+                }
+        		function Function2(){
+                	CreateRequestForInbox();
+                }
+        		function Function3(){
+                	CreateRequestForDraft();
+                }        		
+        </script>
+	</head>
+    <apex:form >
+         <apex:actionFunction name="CreateRequestForEmail" action="{!CreateRequestForEmail}" reRender=""/>
+         <apex:actionFunction name="CreateRequestForInbox" action="{!CreateRequestForInbox}" reRender=""/>
+         <apex:actionFunction name="CreateRequestForInbox" action="{!CreateRequestForInbox}" reRender=""/>
+         <apex:actionFunction name="CreateRequestForDraft" action="{!CreateRequestForDraft}" reRender=""/>
+    </apex:form>
+</apex:page>

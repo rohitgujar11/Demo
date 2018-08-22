@@ -1,0 +1,40 @@
+<apex:page Controller="GetValue">
+   
+       <apex:form >
+       <apex:pageBlock id="output" >
+               <apex:inputText value="{!t.First_Name__c}"/>
+               <apex:inputText value="{!t.Last_Name__c}"/>
+               <apex:inputField value="{!t.Gender__c}"/>
+               <apex:inputText value="{!t.Phone_Number__c}"/>
+               <apex:commandButton value="Save" title="save" action="{!SaveValue}" onclick="saveValue();" />
+               <BR/>
+               <apex:pageblockTable value="{!result}" var="a">
+            <apex:column value="{!a.First_Name__c}"/>
+            <apex:column value="{!a.Last_Name__c}"/>
+            <apex:column value="{!a.Gender__c}"/>
+             <apex:column value="{!a.Phone_Number__c}"/>
+        </apex:pageblockTable>
+        <apex:actionFunction name="saveValue" action="{!SaveValue}" reRender="output"/>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Firt Name</td>
+                    <td>Last Name</td>
+                    <td>Gender</td>
+                    <td>Phone Number</td>
+                </tr>
+             </thead>
+                <apex:repeat value="{!result}" var="s">
+                     <tr>
+                         <td>{!s.First_Name__c}</td>
+                         <td>{!s.Last_Name__c}</td>
+                         <td>{!s.Gender__c}</td>
+                         <td>{!s.Phone_Number__c}</td>
+                     </tr>
+                </apex:repeat>
+        </table>
+   </apex:pageBlock>
+       </apex:form>
+        
+  
+</apex:page>

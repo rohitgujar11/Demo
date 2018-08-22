@@ -1,0 +1,4 @@
+<apex:page showHeader="false" sidebar="false" standardController="Contact" extensions="AttachmentBodyController" 
+           contentType="{!attachment.ContentType}#{!attachment.Name}">
+           {!attachment.body}           
+</apex:page>
